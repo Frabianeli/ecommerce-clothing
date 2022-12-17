@@ -6,7 +6,7 @@ import Form from './components/Home/Form'
 import HeaderScreen from './components/Shared/HeaderScreen'
 import ProductScreen from './components/Product/ProductScreen'
 import FooterScreen from './components/Shared/FooterScreen'
-import ShoppingScreen from './components/shopping/ShoppingScreen'
+import ShoppingScreen from './components/Shopping/ShoppingScreen'
 import CartScreen from './components/Cart/CartScreen'
 
 function App() {
