@@ -1,0 +1,125 @@
+
+/*search product--*/
+.container-product{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+    gap: 10px;
+}
+
+
+.card-product{
+    transition: scale .3s ease;
+    cursor: pointer;
+}
+.card-product:hover{
+    scale: 1.02;
+}
+.card-product__img{
+    width: 100%;
+    height: 100px;
+}
+.card-product__img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.card-product__info{
+    padding: 5px;
+}
+.card-product__info__title{
+    font-size: 14px;
+    padding: 5px 0px;
+    color: rgb(92 91 91);
+}
+.card-product__info__descrip{
+    font-size: 11px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    color: #707070;
+}
+.card-product__info__price{
+    padding-top: 10px;
+    font-size: 15px;
+    color: rgb(68, 68, 68);
+}
+
+@media screen and (min-width: 500px){
+    
+    .container-product{
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        
+    }
+    .card-product__img{
+        height: 130px;
+    }
+    .card-product__info__title{
+        font-size: 15px;
+    }
+    .card-product__info__descrip{
+        font-size: 12px;
+    }
+    .card-product__info__price{
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 720px){
+    
+    .container-product{
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        
+    }
+    .card-product__img{
+        height: 140px;
+    }
+    .card-product__info__title{
+        font-size: 16px;
+    }
+    .card-product__info__descrip{
+        font-size: 13px;
+    }
+    .card-product__info__price{
+        font-size: 17px;
+    }
+}
+
+@media screen and (min-width: 1020px){
+    
+    .container-product{
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        
+    }
+    .card-product__img{
+        height: 150px;
+    }
+    .card-product__info__title{
+        font-size: 16px;
+    }
+    .card-product__info__descrip{
+        font-size: 13px;
+    }
+    .card-product__info__price{
+        font-size: 17px;
+    }
+}
+
+@media screen and (min-width: 1300px){
+    
+    .container-product{
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+     
+    }
+    .card-product__img{
+        height: 200px;
+    }
+    .card-product__info__title{
+        font-size: 18px;
+    }
+    .card-product__info__descrip{
+        font-size: 14px;
+    }
+    .card-product__info__price{
+        font-size: 19px;
+    }
+}

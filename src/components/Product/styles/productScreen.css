@@ -1,0 +1,34 @@
+.product-info-screen{
+    width: 90%;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.product-info-screen__container{
+    display: grid;
+    gap: 40px;
+}
+
+@media screen and (min-width: 600px) {
+    .product-info-screen{
+        width: 85%;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+    
+}
+
+@media screen and (min-width: 720px) {
+    .product-info-screen__container{
+        grid-template-columns: 60% 40%;
+        gap: 0px;
+    }
+    
+}
+
+@media screen and (min-width: 1300px) {
+    .product-info-screen{
+        width: 82%;
+        margin: 0 auto;
+        margin-top: 40px;
+    }
+}

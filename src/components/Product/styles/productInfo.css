@@ -1,0 +1,111 @@
+.product-info{
+    width: 100%;
+    margin: auto;
+}
+.product-info__title{
+    font-size: 26px;
+    padding-bottom: 20px;
+}
+.product-info__price{
+    font-size: 26px;
+    margin-bottom: 15px;
+}
+.product-info_descrip{
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+}
+.product-info__talla{
+    padding-top: 10px;
+}
+.product-info__talla__container{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.product-info__container__talla__subtitle{
+    font-size: 1.2rem;
+}
+.product-info__tallas{
+    border: 1px solid black;
+    padding: 10px 15px;
+    background-color: white;
+    border-radius: 5px;
+}
+.talla-active{
+    background-color: black;
+    color: white;
+}
+
+.product-info__quantity{
+    margin-top: 20px;
+}
+.product-info__quantity__subtitle{
+    font-size: 1.2rem;
+}
+.product-info__container-quantity{
+    display: grid;
+    grid-template-columns: 33.33% 33.33% 33.33%;
+    height: 50px;
+    width: 140px;
+    border: 1px solid rgb(212, 212, 212);
+}
+.product-info__quantity__subtitle{
+    margin-bottom: 20px;
+}
+.btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+}
+.btn i {
+    font-size: 20px;
+    color: rgb(171 171 171);
+    font-weight: 600;
+}
+.input-quantity{
+    border: none;
+    outline: none;
+    text-align: center;
+    font-size: 15px;
+    font-weight: 600;
+    color: rgb(128, 128, 128);
+}
+
+
+.product-info__container-button{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.product-info__btn-cart{
+    width: 100%;
+    max-width: 420px;
+    height: 50px;
+    background-color: white;
+    border: 1px solid black;
+    font-size: 16px;
+    border-radius: 10px;
+}
+.product-info__btn-buy{
+    width: 100%;
+    max-width: 420px;
+    height: 50px;
+    background-color: black;
+    color: white;
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+
+
+
+@media screen and (min-width: 7260px) {
+
+    .product-info{
+        margin-top: 80px;
+    }
+    
+}
