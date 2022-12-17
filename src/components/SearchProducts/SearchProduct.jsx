@@ -1,7 +1,7 @@
 import React from 'react'
 import SearchProductCard from './SearchProductCard'
 import puma2 from '../../assets/pum_portada_2.jpg'
-import './style/SearchProductCard.css'
+import './style/searchProductCard.css'
 
 
 const array = [

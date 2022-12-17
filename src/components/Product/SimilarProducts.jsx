@@ -1,6 +1,4 @@
 import React from 'react'
-import { useRef } from 'react'
-import CardSimilarProducts from './CardSimilarProducts'
 import SliderSimilarProducts from './SliderSimilarProducts'
 import './styles/similarProducts.css'
 

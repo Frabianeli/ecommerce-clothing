@@ -1,8 +1,8 @@
 import React from 'react'
-import ShoppingTableBody from './shoppingTableBody'
+import ShoppingTableBody from './ShoppingTableBody'
 import './style/shoppingTable.css'
 
-const ShopingTable = ({product}) => {
+const ShoppingTable = ({product}) => {
 
   const array = [1,2,3,4,5]
 
@@ -30,4 +30,4 @@ const ShopingTable = ({product}) => {
   )
 }
 
-export default ShopingTable
+export default ShoppingTable
