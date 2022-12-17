@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchProduct from './SearchProduct'
-import './style/searchProductCard.css'
+import './style/SearchProductCard.css'
 
 
 
