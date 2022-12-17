@@ -42,7 +42,7 @@ const Slider = () => {
       const width = lastSlider.offsetWidth
       sliderContainer.current.style.transform = `translateX(-${width}px)`
 
-     /* setTimeout(() => {
+      setTimeout(() => {
         sliderContainer.current.style.transition = 'transform .5s ease-out'
         sliderContainer.current.style.transform = `translateX(0)`;
         
@@ -52,7 +52,7 @@ const Slider = () => {
       clearInterval(animationSlider.current)
       animationSlider.current = setInterval(()=> {
         next()
-      }, 3500)*/
+      }, 3500)
     }
   
 
@@ -93,10 +93,10 @@ const Slider = () => {
       } else {
         setImages(arrayImage)
       }
-        /*animationSlider.current = setInterval(()=> {
+        animationSlider.current = setInterval(()=> {
           next()
         }, 4000)
-      */
+      
     }, [])
   return (
     <div className='slider'>
