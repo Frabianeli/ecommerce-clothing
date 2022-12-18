@@ -1,0 +1,162 @@
+.login__screen{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: 40px auto;
+    margin-bottom: 0px;
+}
+
+.login{
+    background-color: rgb(249 249 249);
+    height: 400px;
+    border: 1px solid #d9d9d9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    height: 420px;
+}
+.login__head{
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.login__head i{
+    font-size: 22px;
+}
+.login__head__title{
+    font-size: 22px;
+    color: rgb(56, 56, 56);
+}
+.form__login{
+    width: 80%;
+    margin: 0 auto;
+}
+.form__login input{
+    display: block;
+    width: 100%;
+    padding: 3px 5px;
+    border: 1px solid rgb(187, 187, 187);
+    margin-bottom: 15px;
+}
+.form__login label{
+    display: block;
+    font-size: 14px;
+    color: rgb(56, 56, 56);
+    font-weight: 500;
+    padding-bottom: 5px;
+}
+.form__login__submit{
+    width: 100%;
+    font-weight: 500;
+    background-color: #d10128;
+    height: 32px;
+    color: white;
+}
+.login__create-user{
+    margin: 8px;
+    display: flex;
+    gap: 5px;
+}
+.login__create-user p{
+    font-size: 12px;
+}
+.login__create-user a{
+    font-size: 12px;
+    color: rgb(47, 137, 255);
+}
+.login__fb,
+.login__google{
+    cursor: pointer;
+    width: 80%;
+    margin: 5px auto;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    padding: 0px 10px;
+    gap: 6%;
+}
+.login__fb{
+    background-color: rgb(20, 106, 204);
+}
+.login__fb span,
+.login__google span{
+    color: white;
+    font-weight: 500;
+    font-size: 13px;
+}
+.login__fb i,
+.login__google i{
+    color:  white;
+    font-size: 18px;
+}
+.login__google span b,
+.login__fb span b{
+    font-weight: 800;
+    color: white;
+}
+.login__google{
+    background-color: #d34646;
+}
+
+@media screen and (min-width: 310px){
+    .login__fb, .login__google {
+        padding: 0px 20px;
+    }
+}
+
+@media screen and (min-width: 700px){
+    .login{
+        padding: 10px;
+    }
+    .login__fb, .login__google {
+        height: 36px;
+    }
+    .form__login input{
+        padding: 4px 5px;
+    }
+}
+
+@media screen and (min-width: 1300px){
+    .login{
+        height: 420px;
+        max-width: 420px;
+        padding: 20px;
+        margin: 0 auto;
+    }
+    .login{
+        padding: 10px;
+    }
+    .login__fb,
+    .login__google {
+        height: 38px;
+    }
+    .login__fb span,
+    .login__google span{
+        color: white;
+        font-weight: 500;
+        font-size: 15px;
+    }
+    .login__fb i,
+    .login__google i{
+        color:  white;
+        font-size: 20px;
+    }
+    .form__login input{
+        padding: 4px 5px;
+        margin-bottom: 17px;
+    }
+    .form__login label{
+        padding-bottom: 6px;
+    }
+    .form__login__submit{
+        height: 34px;
+        letter-spacing: 1px;
+        font-size: 15px;
+    }
+}

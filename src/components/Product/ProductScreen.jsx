@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 import ProductInfo from './ProductInfo'
 import SimilarProducts from './SimilarProducts'
 import SliderProduct from './SliderProduct'
@@ -19,10 +20,15 @@ const product = [
 ]
 
 const productScreen = () => {
+
+  const search = useSelector(state => state.search)
+
+  console.log(search)
+
   return (
     <section className='product-info-screen'>
       <div className='product-info-screen__container'>
-        <SliderProduct images={product[0].images}/>
+        <SliderProduct images={search.images || product[0].images}/>
         <ProductInfo data={product}/>
       </div>
         <SimilarProducts data={product}/>

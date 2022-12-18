@@ -235,11 +235,12 @@ const array = [
   ]
 
 
-const SearchProduct = () => {
+const SearchProduct = ({cart}) => {
   return (
     <section className='container-product'>
         {array.map((e, i )=>
             <SearchProductCard 
+            cart={cart}
                 key={i}
                 product={e}
             />

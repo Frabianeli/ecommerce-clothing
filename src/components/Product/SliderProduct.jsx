@@ -5,7 +5,6 @@ const SliderProduct = ({images}) => {
 
     const [indexCurrent, setIndexCurrent] = useState(0)
 
-
     const next = () => {
         const nextIndex = indexCurrent +1
         if(nextIndex === images.length){

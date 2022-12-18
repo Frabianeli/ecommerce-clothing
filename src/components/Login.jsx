@@ -49,7 +49,7 @@ const Login = () => {
 
   return (
     <div className='Login'>
-        <form id="form" onSubmit={create}>
+        <form id="form" onSubmit={create} className='form'>
             <input type="text" placeholder='title' name='title'/>
             <input type="text" placeholder='description' name='description'/>
             <input type="text" placeholder='price' name='price'/>
