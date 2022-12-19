@@ -8,7 +8,6 @@
 
 .login{
     background-color: rgb(249 249 249);
-    height: 400px;
     border: 1px solid #d9d9d9;
     display: flex;
     flex-direction: column;
@@ -17,7 +16,8 @@
     width: 100%;
     max-width: 380px;
     margin: 0 auto;
-    height: 420px;
+    min-height: 420px;
+    padding: 20px 0px;
 }
 .login__head{
     display: flex;
@@ -39,7 +39,7 @@
 .form__login input{
     display: block;
     width: 100%;
-    padding: 3px 5px;
+    padding: 5px 5px;
     border: 1px solid rgb(187, 187, 187);
     margin-bottom: 15px;
 }
@@ -54,8 +54,9 @@
     width: 100%;
     font-weight: 500;
     background-color: #d10128;
-    height: 32px;
+    height: 34px;
     color: white;
+    font-size: 13px;
 }
 .login__create-user{
     margin: 8px;
@@ -65,7 +66,8 @@
 .login__create-user p{
     font-size: 12px;
 }
-.login__create-user a{
+.login__create-user-btn{
+    cursor: pointer;
     font-size: 12px;
     color: rgb(47, 137, 255);
 }
@@ -74,7 +76,7 @@
     cursor: pointer;
     width: 80%;
     margin: 5px auto;
-    height: 34px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: start;
@@ -88,12 +90,12 @@
 .login__google span{
     color: white;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 14px;
 }
 .login__fb i,
 .login__google i{
     color:  white;
-    font-size: 18px;
+    font-size: 20px;
 }
 .login__google span b,
 .login__fb span b{
@@ -114,9 +116,6 @@
     .login{
         padding: 10px;
     }
-    .login__fb, .login__google {
-        height: 36px;
-    }
     .form__login input{
         padding: 4px 5px;
     }
@@ -124,17 +123,9 @@
 
 @media screen and (min-width: 1300px){
     .login{
-        height: 420px;
         max-width: 420px;
-        padding: 20px;
+        padding: 40px 20px;
         margin: 0 auto;
-    }
-    .login{
-        padding: 10px;
-    }
-    .login__fb,
-    .login__google {
-        height: 38px;
     }
     .login__fb span,
     .login__google span{
@@ -145,17 +136,22 @@
     .login__fb i,
     .login__google i{
         color:  white;
-        font-size: 20px;
+        font-size: 21px;
     }
     .form__login input{
-        padding: 4px 5px;
-        margin-bottom: 17px;
+        margin-bottom: 20px;
+        font-size: 15px;
+        font-weight: 300;
+        padding: 5px 9px;
     }
     .form__login label{
-        padding-bottom: 6px;
+        padding-bottom: 8px;
+        font-size: 15px;
+        font-weight: 500;
     }
     .form__login__submit{
-        height: 34px;
+        margin: 5px 0;
+        height: 36px;
         letter-spacing: 1px;
         font-size: 15px;
     }
