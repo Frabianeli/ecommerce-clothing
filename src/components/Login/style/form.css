@@ -57,11 +57,7 @@
     background-color: #d10128;
     height: 34px;
     color: white;
-<<<<<<< HEAD
     font-size: 13px;
-=======
-    font-size: 14px;
->>>>>>> 6dd541236baa66367287f205c6de649fe96ead98
 }
 .login__create-user{
     margin: 8px;
@@ -81,10 +77,7 @@
     cursor: pointer;
     width: 80%;
     margin: 5px auto;
-<<<<<<< HEAD
     height: 40px;
-=======
->>>>>>> 6dd541236baa66367287f205c6de649fe96ead98
     display: flex;
     align-items: center;
     justify-content: start;
