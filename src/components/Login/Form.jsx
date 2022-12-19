@@ -45,7 +45,7 @@ const Form = () => {
       </div>
       <div className='login__google'>
         <i className="fa-brands fa-google"></i>
-        <span>Continuar con <b>gogle</b></span>
+        <span>Continuar con <b>google</b></span>
       </div>
     </article>
   )
