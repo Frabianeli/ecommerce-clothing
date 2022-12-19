@@ -90,12 +90,12 @@
 .login__google span{
     color: white;
     font-weight: 500;
-    font-size: 13px;
+    font-size: 14px;
 }
 .login__fb i,
 .login__google i{
     color:  white;
-    font-size: 18px;
+    font-size: 20px;
 }
 .login__google span b,
 .login__fb span b{
