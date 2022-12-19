@@ -54,8 +54,9 @@
     width: 100%;
     font-weight: 500;
     background-color: #d10128;
-    height: 32px;
+    height: 34px;
     color: white;
+    font-size: 14px;
 }
 .login__create-user{
     margin: 8px;
@@ -80,6 +81,7 @@
     justify-content: start;
     padding: 0px 10px;
     gap: 6%;
+    height: 40px;
 }
 .login__fb{
     background-color: rgb(20, 106, 204);
