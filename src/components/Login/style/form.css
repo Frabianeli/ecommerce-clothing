@@ -42,6 +42,7 @@
     padding: 5px 5px;
     border: 1px solid rgb(187, 187, 187);
     margin-bottom: 15px;
+    font-weight: 300
 }
 .form__login label{
     display: block;
@@ -56,7 +57,11 @@
     background-color: #d10128;
     height: 34px;
     color: white;
+<<<<<<< HEAD
     font-size: 13px;
+=======
+    font-size: 14px;
+>>>>>>> 6dd541236baa66367287f205c6de649fe96ead98
 }
 .login__create-user{
     margin: 8px;
@@ -76,12 +81,16 @@
     cursor: pointer;
     width: 80%;
     margin: 5px auto;
+<<<<<<< HEAD
     height: 40px;
+=======
+>>>>>>> 6dd541236baa66367287f205c6de649fe96ead98
     display: flex;
     align-items: center;
     justify-content: start;
     padding: 0px 10px;
     gap: 6%;
+    height: 40px;
 }
 .login__fb{
     background-color: rgb(20, 106, 204);
