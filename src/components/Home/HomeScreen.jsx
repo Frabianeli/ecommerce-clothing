@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HomeMark from './HomeMark'
 import Slider from './Slider'
 import puma2  from '../../assets/pum_portada_2.jpg'
 
 import './styles/homeScreen.css'
-import SearchScreen from '../SearchProducts/SearchScreen'
-import SearchProductCard from '../SearchProducts/SearchProductCard'
 import SearchProduct from '../SearchProducts/SearchProduct'
+import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import Loading from '../Shared/Loading'
+import { useState } from 'react'
 
-const HomeScreen = () => {
+const HomeScreen = ({intervalSlider}) => {
 
   const array = [
     {
@@ -52,9 +54,27 @@ const HomeScreen = () => {
     }
   ]
 
+  const isLoading = useSelector(state => state.isLoading)
+  const [productsHome, setProductsHome] = useState()
+
+  const products = useSelector(state => state.product)
+  console.log(products)
+
+  useEffect(() => {
+    if(products.length){
+      let productsHome = []
+      for(let i = 0; i < 8; i++){
+        if(products[i]){
+          productsHome.push(products[i])
+        }
+      }
+      setProductsHome(productsHome)
+    }
+  }, [products])
+  
   return (
     <div className='home'>
-        <Slider />
+        <Slider intervalSlider={intervalSlider}/>
           {
             array.map((product, index) =>
                 <HomeMark 
@@ -64,7 +84,15 @@ const HomeScreen = () => {
               )
           }
         <h2 className='home__subtitle'>Algunos productos : </h2>
-        <SearchProduct />
+        {
+          isLoading?
+            <Loading />
+          :
+          <SearchProduct productsHome={productsHome}/>
+        }
+        <h3 className='home__link-products'>
+          <NavLink to={'/products'} onClick={() => window.scrollTo(0, 0)}>Ver mas...</NavLink>
+        </h3>
     </div>
   )
 }

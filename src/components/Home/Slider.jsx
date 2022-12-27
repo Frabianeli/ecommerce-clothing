@@ -4,9 +4,7 @@ import './styles/slider.css'
 
 
 const arrayImage = [
-    // semi 'https://i.pinimg.com/originals/99/29/51/9929514ed514a922f3e3339894627306.jpg',
-    // semi'https://www.futbolemotion.com/imagescontenidos/lanzamientos/adidas-al-rihla/banner2-alrihla.jpg',
-    'https://www.futbolemotion.com/imagescontenidos/lanzamientos/adidas-mutator-pack/banner.jpg',
+     'https://www.futbolemotion.com/imagescontenidos/lanzamientos/adidas-mutator-pack/banner.jpg',
     'https://www.futbolemotion.com/imagescontenidos/lanzamientos/adidas-predator-edge/banner.jpg',
     'https://www.futbolemotion.com/imagescontenidos/lanzamientos/adidas-inflight/banner.jpg',
     'https://s3-eu-west-1.amazonaws.com/unisport-forever-paths/campaign/adidas-ucl-dragon/Thumbnail-713x509px.jpg',
@@ -27,11 +25,10 @@ const arrayImage = [
     'https://wwwguide2freecom2c262.zapwp.com/q:i/r:1/wp:1/w:1/u:https://www.guide2free.com/wp-content/uploads/2018/11/nike-3.png',
   ]
 
-const Slider = () => {
+const Slider = ({intervalSlider}) => {
 
     const [images, setImages] = useState()
     const sliderContainer = useRef()
-    const animationSlider = useRef()
 
     const prevent = () => {
       const sliderBoxes = sliderContainer.current.children
@@ -47,12 +44,11 @@ const Slider = () => {
         sliderContainer.current.style.transform = `translateX(0)`;
         
 			}, 30);
-
-      clearInterval(animationSlider.current)
-      clearInterval(animationSlider.current)
-      animationSlider.current = setInterval(()=> {
-        next()
-      }, 3500)
+      
+        clearInterval(intervalSlider.current)
+        intervalSlider.current = setInterval(()=> {
+          next()
+        }, 3500)
     }
   
 
@@ -77,27 +73,30 @@ const Slider = () => {
 			}
 
       sliderContainer.current.addEventListener('transitionend', transition)
-
-        clearInterval(animationSlider.current)
-        animationSlider.current = setInterval(()=> {
-          next()
-        }, 3500)
+     /* clearInterval(intervalSliderSlider.current)
+      intervalSliderSlider.current = setInterval(()=> {
+        next()
+      }, 3500)*/
+      clearInterval(intervalSlider.current)
+      intervalSlider.current = setInterval(()=> {
+        next()
+      }, 3500)
     }, [])
 
 
     useEffect(() => {
       const width = window.innerWidth
-      console.log(width)
       if(width > 500){
         setImages(arrayImage2)
       } else {
         setImages(arrayImage)
       }
-        animationSlider.current = setInterval(()=> {
+      intervalSlider.current = setInterval(()=> {
           next()
         }, 4000)
       
     }, [])
+
   return (
     <div className='slider'>
         <div className='slider__container' ref={sliderContainer}>

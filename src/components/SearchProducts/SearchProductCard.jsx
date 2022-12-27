@@ -1,29 +1,58 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import { setSearch } from '../../store/slices/search'
 import './style/searchProductCard.css'
 
-const SearchProductCard = ({product, cart}) => {
+import Swal from 'sweetalert2'
+import axios from 'axios'
+import { getConfig } from '../../utils/getConfig'
 
+
+const SearchProductCard = ({product, cart}) => {
+    
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const productInfo = () => {
-        navigate('/cart')
+        dispatch(setSearch(product))
+        navigate(':id')
+        window.scrollTo( 0, 0)
     }
 
     const addCart = (e) => {
         e.stopPropagation()
-        dispatch(setSearch(product))
-        navigate('/cart')
-        console.log('se agrego al carrito correctamente')
+
+        const cart = {
+            cartTotalPrice: product.price,
+            productId: product.id,
+            quantity: 1,
+            totalPrice: product.price 
+        }
+
+        if(product.stock > 1){
+        axios.post('https://ecommerce-rom.onrender.com/api/v1/cart/me', cart, getConfig())
+        .then(res =>{
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                showConfirmButton: false,
+                timer: 1400,
+                width: '200px',
+                color: 'white',
+                text: 'Se agrego correctamente',
+                background: 'rgb(23 57 66)',
+              }),
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+        }
     }
 
   return (
     <article className='card-product' onClick={productInfo}>
         <div className='card-product__img'>
             <img 
-                src={product.images[0]}
+                src={product.products_imgs[0].url}
                 alt="product"
             />
         </div>

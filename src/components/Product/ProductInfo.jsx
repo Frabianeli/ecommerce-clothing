@@ -1,16 +1,21 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { useEffect } from 'react'
+import Swal from 'sweetalert2'
+import { getConfig } from '../../utils/getConfig'
 import './styles/productInfo.css'
 
 
-const ProductInfo = ({data}) => {
+const ProductInfo = ({product}) => {
 
     const [indexSize, setIndexSize] = useState(0)
     const [count, setCount] = useState(1)
 
-    const tallas = data[0].tallas.sort((a, b) => a - b)
+    const arrayTalla = [39,40,42,41,43]
 
+    const tallas = arrayTalla.sort((a, b) => a - b)
 
+console.log(product)
     const getTalla = (index) => {
         setIndexSize(index)
         
@@ -35,15 +40,45 @@ const ProductInfo = ({data}) => {
         }
     } 
 
+    const addCart = () => {
+        const cart = {
+            cartTotalPrice: product.price,
+            productId: product.id,
+            quantity: count,
+            totalPrice: product.price 
+        }
+
+        if(product.stock > 1){
+        axios.post('https://ecommerce-rom.onrender.com/api/v1/cart/me', cart, getConfig())
+        .then(res =>{
+            Swal.fire({
+                position: 'center',
+                icon: 'success',
+                //title: 'Se agrego al carrito',
+                showConfirmButton: false,
+                timer: 1400,
+                width: '200px',
+                color: 'white',
+                // iconColor: 'red',
+                text: 'Se agrego correctamente',
+                background: 'rgb(23 57 66)',
+              }),
+            console.log(res)
+        })
+        .catch(err => console.log(err))
+        }
+    }
+
     useEffect(() => {
         console.log(tallas[indexSize])
     }, [indexSize])
 
+
   return (
     <div className='product-info'>
-        <h2 className='product-info__title'>{data[0].title}</h2>
-        <h2 className='product-info__price'>S/{data[0].price}.00</h2>
-        <p className='product-info_descrip'>Jean corte regular con diseño de doble color en las piernas</p>
+        <h2 className='product-info__title'>{product.title}</h2>
+        <h2 className='product-info__price'>S/{product.price}.00</h2>
+        <p className='product-info_descrip'>{product.description}</p>
         <div className='product-info__talla'>
             <h3 className='product-info__container__talla__subtitle'>Tallas</h3>
             <div className='product-info__talla__container'>
@@ -83,7 +118,7 @@ const ProductInfo = ({data}) => {
             </div>
         </div>
         <div className='product-info__container-button'>
-            <button className='product-info__btn-cart'>
+            <button onClick={addCart} className='product-info__btn-cart'>
                <span>Agregar al carrito</span>
             </button>
             <button className='product-info__btn-buy'>

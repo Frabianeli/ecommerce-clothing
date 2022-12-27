@@ -39,6 +39,17 @@
 .container__img img:hover{
     scale:  1.04;
 }
+.home__link-products{
+    text-align: center;
+}
+.home__link-products a{
+    color: rgb(92 91 91);
+    font-size: 16px;
+    font-weight: 500;
+}
+.home__link-products a:hover{
+    color: rgb(68, 68, 68);
+}
 
 @media screen and (min-width: 420px){
     .home-mark__title{

@@ -1,29 +1,68 @@
+import axios from 'axios'
 import React from 'react'
+import { useEffect } from 'react'
 import { useState } from 'react'
-import { useForm, useWatch } from 'react-hook-form'
-import { NavLink } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import './style/form.css'
+import Swal from 'sweetalert2'
+import { useDispatch } from 'react-redux'
+import { setAdmin } from '../../store/slices/admin'
 
-const Form = () => {
+const Form = ({setUserLogged}) => {
 
   const [createUser, setCreateUser] = useState(false)
 
   const {register, handleSubmit, reset} = useForm()
 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const SwalAlert = (icon, color, iconColor, text, background) => {
+    Swal.fire({
+      position: 'center',
+      icon: icon,
+      timer: 2000,
+      showConfirmButton: false,
+      width: '200px',
+      color: color,
+      iconColor: iconColor,
+      text: text,
+      background: background,
+    })
+  }
+
+
   const submit = (data) => {
-    const user ={
+    const login ={
       email: data.email,
       password: data.password
     }
-    if(data.email.length && data.password.length > 6){
-      console.log(user)
-      alert(JSON.stringify(user))
+    if(data.email.length && data.password.length > 3){
+      axios.post('https://ecommerce-rom.onrender.com/api/v1/auth/login', login)
+        .then(res => {
+          setUserLogged(true)
+          localStorage.setItem('token',res.data.user)
+          SwalAlert('success','#f5f5f5','#4eb723','Credenciales validas',' #184219')
+          navigate('/cart') 
+          if(res.data.response){
+            dispatch(setAdmin(true))
+          } else{
+            dispatch(setAdmin(false))
+          }
+        })
+        .catch(err => SwalAlert('error','white','rgb(237 4 4)','Credenciales invalidas','rgb(104 2 2)'))
     } else {
       alert('Minimo 6 caracteres')
     }
     reset()
   }
 
+
+  useEffect(()=>{
+    reset()
+  },[createUser])
+  
   const submitRegister = (data) =>{
     
     const userCreate = {
@@ -31,8 +70,24 @@ const Form = () => {
       email: data.email,
       password: data.password
     }
-    if(data.name.length && data.email.length && data.password.length > 6){
-      alert(JSON.stringify(userCreate))
+    const {name, ...login} = userCreate
+    console.log(login)
+    if(data.email.length && data.password.length > 6  && data.name.length){
+      axios.post('https://ecommerce-rom.onrender.com/auth/register', userCreate)
+        .then(res => {
+            axios.post('https://ecommerce-rom.onrender.com/api/v1/auth/login', login)
+              .then(res => {//#f5f5f5  #184219 #389f0e
+                setUserLogged(true)
+                localStorage.setItem('token',res.data.user)
+                SwalAlert('success','#f5f5f5','#4eb723','Se creo correctamente',' #184219')
+                navigate('/cart')
+                dispatch(setAdmin(false))
+              })
+              .catch(err => console.log(err))
+          })
+        .catch(err => {
+          SwalAlert('error','white','rgb(237 4 4)','El email ya existe','rgb(104 2 2)')
+        })
     } else {
       alert('Minimo 6 caracteres')
     }
@@ -49,12 +104,12 @@ const Form = () => {
           {createUser ? 'Crear usuario' : 'Ingresar'}
         </h2>
       </div>
-      <form onSubmit={handleSubmit(submit)} className='form__login'>
+      <form onSubmit={handleSubmit(!createUser ? submit : submitRegister)} className='form__login'>
         {
           createUser &&
           <>
             <label htmlFor="name">nombre:</label>
-            <input type="email" id='name' {...register("name")}/>
+            <input type="name" id='name' {...register("name")}/>
           </>
         }
         <label htmlFor="email">email:</label>

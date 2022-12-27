@@ -1,7 +1,7 @@
 import ShoppingCard from './ShoppingCard'
 import './style/shoppingScreen.css'
 
-const ShoppingScreen = () => {
+const ShoppingScreen = ({intervalSlider}) => {
 
 
   /*useEffect(() => {
@@ -10,6 +10,8 @@ const ShoppingScreen = () => {
       .then(res => setPurchases(res.data.data.purchases))
       .catch(err => console.log(err))
   }, [])*/
+
+  clearInterval(intervalSlider.current)
 
   const product = [
     { images : ['https://www.innvictus.com/medias/IN-DD8959-100-1.jpg?context=bWFzdGVyfGltYWdlc3w3NDA3MnxpbWFnZS9qcGVnfGltYWdlcy9oOWYvaDk1LzExMjE2ODA5NTkwODE0LmpwZ3xlZGQ4NGZkZDQ4ZjVjYzA4YjllZDg5MDhhMzVlYWM4MmYyMjNlZTk1Yjg5NWFjMzI0YmVlNTZjZmFhNTRjMGY5',

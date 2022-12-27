@@ -33,7 +33,7 @@ const FooterScreen = () => {
         <span className='footer__line'></span>
         <ul className='footer__links'>
             <li className='footer__links__item'>
-                <NavLink to={'/'}
+                <NavLink to={'/'} onClick={() =>window.scrollTo(0, 0)}
                 className={({ isActive }) =>
                 isActive
                   ?
@@ -45,7 +45,7 @@ const FooterScreen = () => {
                 </NavLink>
             </li>
             <li className='footer__links__item'>
-                <NavLink to={'/Cart'}
+                <NavLink to={'/Cart'} onClick={() =>window.scrollTo(0, 0)}
                 className={({ isActive }) =>
                 isActive
                   ?
@@ -57,7 +57,7 @@ const FooterScreen = () => {
                 </NavLink>
             </li>
             <li className='footer__links__item'>
-                <NavLink to={'/shopping'}
+                <NavLink to={'/shopping'} onClick={() =>window.scrollTo(0, 0)}
                 className={({ isActive }) =>
                 isActive
                   ?

@@ -1,17 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useRef } from 'react'
-import { useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
+import { NavLink, useNavigate } from 'react-router-dom'
+import { setAdmin } from '../../store/slices/admin'
+import { setCart } from '../../store/slices/cart'
 import {setSearch} from '../../store/slices/search'
 import './styles/headerScreen.css'
 
 
-const HeaderScreen = () => {
+const HeaderScreen = ({userLogged, setUserLogged}) => {
 
+  const { register, reset, handleSubmit } = useForm()
   const navbar = useRef()
   const search = useRef() 
-  console.log(search)
+
+
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const products = useSelector(state => state.product)
 
   const toggle = () => {
     navbar.current.classList.toggle('navbar-open')
@@ -21,12 +29,26 @@ const HeaderScreen = () => {
     search.current.classList.toggle('header__search-open')
   }
 
-  const submitSearch = (e) => {
-    e.preventDefault()
-    const value = e.target.search.value
+  const submitSearch = (data) => {
+    const value = data.search.toLowerCase()
+    console.log(data.search)
     search.current.classList.toggle('header__search-open')
-    dispatch(setSearch(value))
+    const filter = products.filter(product => product.title.toLowerCase().includes(value))
+    if(filter.length){
+      dispatch(setSearch(filter))
+    }
+    navigate('/products')
+    reset()
   }
+
+  const signOff = () => {
+    localStorage.removeItem('token')
+    dispatch(setCart([]))
+    setUserLogged(false)
+    navigate('/login')
+    dispatch(setAdmin(false))
+  }
+  
 
 
   return (
@@ -34,7 +56,7 @@ const HeaderScreen = () => {
         <div className='row-header-screen'>
         <header className='header'>
           <h1 className='header__title'>
-              <NavLink
+              <NavLink onClick={() => window.scrollTo(0, 0)}
                   to={'/'}
                   className={({ isActive }) =>
                     isActive
@@ -59,7 +81,7 @@ const HeaderScreen = () => {
           <nav className='navbar' ref={navbar}>
             <ul className='navbar__list'>
               <li onClick={toggle} className='navbar__item'>
-                <NavLink
+                <NavLink onClick={() => window.scrollTo(0, 0)}
                   to={'/cart'}
                   className={({ isActive }) =>
                     isActive
@@ -74,21 +96,7 @@ const HeaderScreen = () => {
               </li>
               <li onClick={toggle} className='navbar__item'>
                 <NavLink
-                    to={'/login'}
-                    className={({ isActive }) =>
-                      isActive
-                        ?
-                        'navbar__link navbar__link-active'
-                        :
-                        'navbar__link'}
-                  >
-                    <i className="fa-solid fa-user"></i>
-                    <p>Login</p>
-                  </NavLink>
-              </li>
-              <li onClick={toggle} className='navbar__item'>
-                <NavLink
-                  to={'/shopping'}
+                  to={'/shopping'} onClick={() =>window.scrollTo(0, 0)}
                   className={({ isActive }) =>
                     isActive
                       ?
@@ -100,19 +108,39 @@ const HeaderScreen = () => {
                   <p>Compras</p>
                 </NavLink>
               </li>
-              <li onClick={openSearch} className='navbar__item'>
-                <NavLink
-                  to={'/products'}
-                  className={({ isActive }) =>
-                    isActive
-                      ?
-                      'navbar__link navbar__link-active'
-                      :
-                      'navbar__link'}
-                  >
+              <li onClick={openSearch} className='navbar__item navbar__item-hidden'>
+                <button className='navbar__link'>
                   <i className="fa-solid fa-magnifying-glass"></i>
                   <p>Search</p>
-                </NavLink>
+                </button>
+              </li>
+              <li onClick={()=> !userLogged && toggle()} 
+                className='navbar__item'>
+                { 
+                  !userLogged ?
+                  <NavLink onClick={() =>window.scrollTo(0, 0)}
+                    to={'/login'}
+                    className={({ isActive }) =>
+                      isActive
+                        ?
+                        'navbar__link navbar__link-active'
+                        :
+                        'navbar__link'}
+                  >
+                    <i className="fa-solid fa-user"></i>
+                    <p>Login</p>
+                  </NavLink>
+                  :
+                  <details className='details'>
+                    <summary >
+                      <i className="fa-solid fa-user"></i>
+                      <i className="fa-solid fa-caret-down"></i>
+                    </summary>
+                    <ul className='details__ul'>
+                      <li onClick={() => {signOff(), toggle()}}>Cerrar sesion</li>
+                    </ul>
+                  </details>
+                }
               </li>
             </ul>
           </nav>
@@ -122,9 +150,9 @@ const HeaderScreen = () => {
       <div className='header__search' ref={search}>
         <button onClick={openSearch} className='header__search__btn-open'>X</button>
         <form className='header__search__form'
-            onSubmit={submitSearch}
+            onSubmit={handleSubmit(submitSearch)}
           >
-          <input type="text" className='input__header__search' name='search'/>
+          <input type="text" className='input__header__search' {...register("search")}/>
           <button className='btn__header__search'>Buscar</button>
         </form>
       </div>

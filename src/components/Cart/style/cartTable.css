@@ -32,6 +32,33 @@
     border-bottom: 1px solid silver;
 }
 
+.tbody__tr__loading,
+.tbody__tr__empty{
+    display: block;
+    width: 100%;
+    margin: 50px 0px;
+}
+.td__empty{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100px;
+    gap: 20px;
+}
+.td__empty__title{
+    color: #424242;
+    font-size: 24px;
+}
+.td__empty__btn{
+    background-color: #5c5c5c;
+    border-radius: 10px;
+    width: 150px;
+    height: 36px;
+    color: rgb(245, 245, 245);
+    font-weight: 500;
+}
+
 @media screen and (min-width: 430px) {
     .thead__th__total{
         display: block;

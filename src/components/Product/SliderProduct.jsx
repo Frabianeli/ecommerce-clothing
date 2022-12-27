@@ -27,9 +27,9 @@ const SliderProduct = ({images}) => {
 
         <div className='slider__product__current'>
             {
-                images.map((img, index) => (
+                images?.map((img, index) => (
                         <img 
-                            src={img} 
+                            src={img.url} 
                             alt='product'
                             key={index}
                             className={
@@ -50,13 +50,13 @@ const SliderProduct = ({images}) => {
 
         <div className='slider__product__box'>
             {
-                images.map((img, index) => (
+                images?.map((img, index) => (
                     <div onClick={() => setIndexCurrent(index)} 
                     key={index}
                     className={indexCurrent === index ? `slider__box box-active` : 'slider__box'}
                     >
                         <img 
-                            src={img} 
+                            src={img.url} 
                             alt="product" 
                             className='slider__box__imgs'
                         />

@@ -17,7 +17,7 @@
     max-width: 380px;
     margin: 0 auto;
     min-height: 420px;
-    padding: 20px 0px;
+    padding: 40px 0px;
 }
 .login__head{
     display: flex;
@@ -116,7 +116,7 @@
 
 @media screen and (min-width: 700px){
     .login{
-        padding: 10px;
+        padding: 50px 20px;
     }
     .form__login input{
         padding: 4px 5px;

@@ -1,6 +1,48 @@
 :root{
     --color-footer: rgb(10, 10, 10);
 }
+details{
+    color: black;
+    position: relative;
+    cursor: pointer;
+}
+summary{
+    list-style: none;
+    color: white;
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+    font-size: 22px;
+}
+summary .fa-caret-down{
+    font-size: 16px;
+    position: relative;
+    top: 3px;
+}
+details[open] summary .fa-caret-down{
+    transform: rotate(180deg);
+}
+.details__ul{
+    background-color: rgb(40 40 40);
+    width: 170px;
+    position: absolute;
+    right: 0px;
+    margin-top: 10px;
+    padding: 20px 0px;
+}
+.details__ul li{
+    color: white;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 500;
+    padding: 2px 30px;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+}
+.details__ul li:hover{
+    transition: background .3s ease;
+    background-color: rgb(211 24 50);
+}
 .row-header{
     position: fixed;
     width: 100%;
@@ -73,7 +115,7 @@
     max-width: 390px;
 }
 .header__search__btn-open{
-    background-color: rgb(211 24 50);;
+    background-color: rgb(211 24 50);
     padding: 6px 10px;
     color: aliceblue;
     font-weight: 500;
@@ -119,12 +161,26 @@
     display: flex;
     justify-content: center;
 }
+.navbar__item-hidden{
+    display: none;
+}
 .navbar__link{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 3px;
+    width: 100%;
+}
+.navbar__link-login{
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 5px;
+}
+.navbar__link-login .fa-caret-down{
+    font-size: 16px;
+    position: relative;
+    top: 3px;
 }
 .navbar__link i{
     font-size: 22px;
@@ -157,6 +213,9 @@
     .header__buttons{
         display: none;
     }
+    .navbar__item-hidden{
+        display: inherit;
+    }
     .navbar{
         position: relative;
         z-index: 1;
@@ -171,6 +230,9 @@
     .navbar__list{
         flex-direction: row;
         padding: 0;
+    }
+    .details__ul{
+        background-color: var(--color-footer);
     }
 }
 @media screen and (min-width: 720px) {

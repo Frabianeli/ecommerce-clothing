@@ -2,7 +2,7 @@ import React from 'react'
 import HomeCard from './HomeCard'
 
 const HomeMark = ({product}) => {
-    console.log(product)
+   
   return (
     <section className='home-mark'>
         <h3 className='home-mark__title'>{product.brand}</h3>

@@ -19,17 +19,17 @@ const product = [
     }
 ]
 
-const productScreen = () => {
+const productScreen = ({intervalSlider}) => {
 
   const search = useSelector(state => state.search)
-
+  clearInterval(intervalSlider.current)
   console.log(search)
 
   return (
     <section className='product-info-screen'>
       <div className='product-info-screen__container'>
-        <SliderProduct images={search.images || product[0].images}/>
-        <ProductInfo data={product}/>
+        <SliderProduct images={search.products_imgs || product[0].images}/>
+        <ProductInfo product={search}/>
       </div>
         <SimilarProducts data={product}/>
     </section>
