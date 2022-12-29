@@ -6,8 +6,6 @@ import { useSelector } from 'react-redux'
 
 
 
-
-
 const SearchProduct = ({cart, productsHome}) => {
 
   const products = useSelector(state => state.product)
