@@ -1,13 +1,73 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import Loading from '../Shared/Loading'
 import CartTableBody from './CartTableBody'
 import './style/cartTable.css'
+import Cookies from 'js-cookie'
+import CartLoading from './CartLoading'
+import CartEmpty from './CartEmpty'
+import { getAllCart } from '../../store/slices/cart'
 
-const CartTable = ({cart, goToProducts}) => {
+const CartTable = ({ goToProducts, order}) => {
 
   const isLoading = useSelector(state => state.isLoading)
+  const cart = useSelector(state => state.cart)
+  const dispatch = useDispatch()
 
+  console.log('CART', cart)
+  const cookie = Cookies.get('data_checkouts')
+  const product = cookie &&  JSON.parse(cookie) 
+  useEffect(() => {
+    console.log('USEEFECT TBALE')
+    if(!cart.length){
+      console.log('SIN CART')
+      dispatch(getAllCart())
+    }
+  }, [])
+  console.log('PRODUCT', product)
+
+  const conditionByCart = () => {
+      if(isLoading){
+        return(
+          <CartLoading />
+        )
+      } else if(cart.cart_products && cart.cart_products?.length){
+        return(
+          cart.cart_products.map(e =>   (
+            <CartTableBody 
+            key={e.id}
+            product={e}
+            order={order ? true : false}  
+          />
+        ))
+        )
+      } else{
+        return (
+          <CartEmpty goToProducts={goToProducts}/>
+        )
+      }
+    }
+
+  const conditionByCheckouts = () => {
+    if(localStorage.getItem('cart_checkouts')){
+      console.log('ESTOY EN CHECKOUT CART')
+      return cart.cart_products?.map((e) => (
+        <CartTableBody
+          key={e.id}
+          product={e}
+          order={order ? true : false}  
+        />
+      ))
+    } else {
+      return product.cart_products?.map((e) => (
+        <CartTableBody
+          key={e.id}
+          product={e}
+          order={order ? true : false}  
+        />
+      ))
+    }
+  } 
 
   return (
     <table className='table'>
@@ -20,33 +80,11 @@ const CartTable = ({cart, goToProducts}) => {
         </tr>
       </thead>
       <tbody className='tbody'>
-
         {
-
-          isLoading ?
-            <tr className='tbody__tr__loading'>
-              <td className='td__empty'>
-                <Loading />
-              </td>
-            </tr>
-          : 
-            cart.cart_products?.length
-          ?
-          cart.cart_products?.map((product) => 
-              <CartTableBody 
-                product={product}
-                key={product.id}  
-              />
-            )
-          :
-            <tr className='tbody__tr__empty'>
-              <td className='td__empty'>
-                  <h3 className='td__empty__title'>Tu carrito esta vacío</h3>
-                  <button onClick={goToProducts} className='td__empty__btn'>
-                    Ver productos
-                  </button>
-              </td>
-            </tr>
+          order && conditionByCheckouts()
+        }
+        {
+          !order &&  conditionByCart()
         }
       </tbody>
     </table>

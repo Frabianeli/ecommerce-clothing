@@ -1,6 +1,5 @@
 
 .slider {
-    height: 180px;
     margin: auto;
     overflow: hidden;
     position: relative;
@@ -14,6 +13,7 @@
     height: 100%;
     display: flex;
     flex-wrap: nowrap;
+    max-height: 350px;
 }
 .slider__container__box{
     min-width: 100%;
@@ -49,23 +49,18 @@
     font-size: 40px;
     filter: drop-shadow(3px 0px rgb(167, 167, 167));
 }
-@media screen and (min-width: 600px){
-    .slider {
-        height: 250px;
-    }
-}
+
 @media screen and (min-width: 800px){
-    .slider {
-        height: 300px;
+    .slider__container{
+        max-height: 380px;
     }
 }
 @media screen and (min-width: 1000px){
-    .slider {
-        height: 360px;
-    }
+    
 }
 @media screen and (min-width: 1000px){
-    .slider {
-        height: 400px;
+    .slider__container{
+        max-height: 450px;
     }
+    
 }

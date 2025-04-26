@@ -3,6 +3,12 @@
     margin: 0 auto;
     margin-top: 40px;
 }
+.product-info-screen-loading{
+    height: 75vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .product-info-screen__container{
     display: grid;
     gap: 40px;

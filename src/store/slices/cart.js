@@ -15,14 +15,18 @@ export const cartSlice = createSlice({
 
 export const getAllCart = (isLoading) => (dispatch) => {
     if(isLoading){
+        console.log('SLICE-LOADING')
         dispatch(setIsLoading(true))
     }
-    console.log(isLoading)
-    const URL = 'https://ecommerce-rom.onrender.com/api/v1/cart/me'
-    axios.get(URL, getConfig())
-        .then(res => dispatch(setCart(res.data)))
+    const URL = 'http://localhost:3000/api/v1/cart/me'
+    return axios.get(URL, getConfig())
+        .then(res =>{
+            console.log('THEN AXIOS')
+            dispatch(setCart(res.data))
+        })
         .catch(err => console.log(err))
         .finally(() => isLoading && dispatch(setIsLoading(false)))
+
 }
 
 export default cartSlice.reducer

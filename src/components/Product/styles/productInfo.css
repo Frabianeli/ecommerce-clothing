@@ -6,6 +6,16 @@
     font-size: 26px;
     padding-bottom: 20px;
 }
+.product-info__stock{
+    padding: 10px 20px;
+    background-color: black;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+.product-info__stock-title{
+    color: white;
+    letter-spacing: 3px;
+}
 .product-info__price{
     font-size: 26px;
     margin-bottom: 15px;
@@ -99,7 +109,11 @@
     border-radius: 10px;
 }
 
-
+.product-info__btn-buy:disabled,
+.product-info__btn-cart:disabled{
+    cursor: not-allowed;
+    opacity: .8;
+}
 
 
 @media screen and (min-width: 7260px) {

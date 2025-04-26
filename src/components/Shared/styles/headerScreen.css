@@ -1,71 +1,30 @@
-:root{
-    --color-footer: rgb(10, 10, 10);
-}
-details{
-    color: black;
-    position: relative;
-    cursor: pointer;
-}
-summary{
-    list-style: none;
-    color: white;
-    display: flex;
-    align-items: flex-end;
-    gap: 5px;
-    font-size: 22px;
-}
-summary .fa-caret-down{
-    font-size: 16px;
-    position: relative;
-    top: 3px;
-}
-details[open] summary .fa-caret-down{
-    transform: rotate(180deg);
-}
-.details__ul{
-    background-color: rgb(40 40 40);
-    width: 170px;
-    position: absolute;
-    right: 0px;
-    margin-top: 10px;
-    padding: 20px 0px;
-}
-.details__ul li{
-    color: white;
-    cursor: pointer;
-    width: 100%;
-    font-weight: 500;
-    padding: 2px 30px;
-    line-height: 30px;
-    letter-spacing: 0.5px;
-}
-.details__ul li:hover{
-    transition: background .3s ease;
-    background-color: rgb(211 24 50);
-}
 .row-header{
     position: fixed;
     width: 100%;
     z-index: 10;
+    border-bottom: 1px solid rgb(139, 139, 139);
+    background-color: var(--color-footer);
+    animation: transition 1s ease;
 }
 .row-header-screen{
-    background-color: var(--color-footer);
+    background-color: initial;
 }
 .header{
-    background-color:   var(--color-footer);
-    padding: 20px;
+    background-color:   initial;
     display: flex;
+    width: 90%;
+    margin: 0 auto;
     justify-content: space-between;
+    align-items: center;
+    height: 70px;
     z-index: 10;
     position: relative;
 }
 .header__title__link{
     display: grid;
     align-content: center;
-    color: aliceblue;
+    color: var(--color-header-link);
     z-index: 10;
-    background: linear-gradient(to bottom right, rgb(0 0 0), rgb(44 43 43));
-    background-color: aliceblue;
     cursor: pointer;
     font-size: 22px;
     border-radius: 0 15px 15px 0;
@@ -83,7 +42,7 @@ details[open] summary .fa-caret-down{
 }
 .header__buttons__btn-search i{
     font-size: 21px;
-    color: aliceblue;
+    color: var(--color-header-link);
 }
 .header__buttons__btn-bars {
     width: 40px;
@@ -91,7 +50,7 @@ details[open] summary .fa-caret-down{
 }
 .header__buttons__btn-bars i {
     font-size: 22px;
-    color: aliceblue;
+    color: var(--color-header-link);
 }
 .header__search{
     width:  100%;
@@ -99,11 +58,15 @@ details[open] summary .fa-caret-down{
     display: flex;
     justify-content: center;
     clip-path: polygon(0 0, 0 0, 100% 0, 100% 0);
-    transition: all .4s ease;
+    transition:  .4s ease;
+    transition-property: clip-path, padding;
+    height: 0;
 }
 .header__search-open{
+    pointer-events: inherit;
     clip-path:polygon(0 100%, 0 0, 100% 0, 100% 100%);
     padding: 10px 0px;
+    height: auto;
 }
 
 .header__search__form{
@@ -139,7 +102,7 @@ details[open] summary .fa-caret-down{
     z-index: 5;
     height: 100vh;
     width: 80%;
-    background-color: var(--color-footer);
+    background-color: initial;
     transform: translateX(105%);
     transition: transform .6s ease;
     box-shadow: -2px 57px 5px #3c3932;
@@ -171,20 +134,78 @@ details[open] summary .fa-caret-down{
     justify-content: center;
     gap: 3px;
     width: 100%;
+    height: 50px;
 }
+.navbar__link-cart{
+    position: relative;
+}
+.navbar__link__amount{
+    position: absolute;
+    top: -7px;
+    right: calc(50% - 20px);
+    background-color: crimson;
+    color: rgb(255, 255, 255);
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar__link-details{
+    cursor: pointer;
+    gap: 10px;
+}
+
+.details__link__user{
+    display: flex;
+    gap: 8px;
+    position: relative;
+}
+.caret-header{
+    position: relative;
+    top: 5px;
+}
+.details__ul{
+    background-color: rgb(40 40 40);
+    position: absolute;
+    width: 170px;
+    top: 35px;
+    right: -63px;
+    padding: 20px 0px;
+}
+.details__ul li{
+    color: black;
+    cursor: pointer;
+    width: 100%;
+    font-weight: 500;
+    line-height: 30px;
+    letter-spacing: 0.5px;
+    font-size: 15px;
+}
+.details__ul li:hover{
+    transition: background .3s ease;
+    background-color: rgb(211 24 50);
+}
+
+/*
 .navbar__link-login{
     flex-direction: row;
     align-items: flex-end;
     gap: 5px;
 }
-.navbar__link-login .fa-caret-down{
+.navbar__link-login .caret-header{
     font-size: 16px;
     position: relative;
     top: 3px;
-}
+}*/
+
 .navbar__link i{
     font-size: 22px;
-    color: aliceblue;
+    color: var(--color-header-link);
 }
 .navbar__link p {
     color: white;
@@ -199,22 +220,38 @@ details[open] summary .fa-caret-down{
     color: rgb(211 24 50);
 }
 
-
+@media screen and (min-width: 360px){
+    .row-header-screen{
+        background-color: white;
+    }
+    :root {
+        --color-header-link: rgb(0, 0, 0);
+    }
+}
+@media sceen and (min-width: 362px){
+    .row-header-screen{
+        background-color: white;
+    }
+    :root{
+        --color-header-link: rgb(255, 255, 255);
+    }
+}
 @media screen and (min-width: 720px) {
     .row-header-screen{
         background-color: var(--color-footer);
     }
     .header{
-        padding: 25px 0px;
-        width: 85%;
-        margin: 0 auto;
         box-shadow: none;
+        height: 80px;
     }
     .header__buttons{
         display: none;
     }
     .navbar__item-hidden{
         display: inherit;
+    }
+    .navbar__item{
+        width: 55px;
     }
     .navbar{
         position: relative;
@@ -224,19 +261,28 @@ details[open] summary .fa-caret-down{
         width: auto;
         height: auto;
     }
+    .navbar__link__amount{    
+        top: 4px;
+        right: 5px;
+    }
     .navbar__link p{
         display: none;
     }
     .navbar__list{
         flex-direction: row;
         padding: 0;
+        gap: 5px;
     }
     .details__ul{
         background-color: var(--color-footer);
     }
+    .details__ul{
+        right: 0px;
+    }
 }
-@media screen and (min-width: 720px) {
-   .header{
-       width: 85%;
-   } 
+
+@media screen and (min-width: 800px) {
+    .header{
+        width: 85%;
+    }
 }

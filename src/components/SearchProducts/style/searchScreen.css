@@ -1,0 +1,14 @@
+.product__screen{
+    width: 95%;
+    margin: 40px auto;
+}
+
+@media screen and (min-width: 720px) {
+    .search__below{
+        display: flex;
+        gap: 20px;
+    }
+    .search__below-open{
+        gap: 0;
+    }
+}

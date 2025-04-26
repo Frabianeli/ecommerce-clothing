@@ -13,7 +13,7 @@ import { setAdmin } from '../../store/slices/admin'
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
 import { getAnalytics } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js";
 
-import { getAuth, signInWithPopup, FacebookAuthProvider, GoogleAuthProvider  } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"
+import { getAuth, signInWithPopup, TwitterAuthProvider,  GithubAuthProvider, FacebookAuthProvider, GoogleAuthProvider  } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"
 
 
 const firebaseConfig = {
@@ -25,6 +25,10 @@ const firebaseConfig = {
   appId: "1:506533743807:web:e6ba6bf0be78f38e37ca0a",
   measurementId: "G-YBSXMNS243"
 };
+
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const auth = getAuth(app)
 
 const Form = ({setUserLogged}) => {
 
@@ -56,7 +60,7 @@ const Form = ({setUserLogged}) => {
       password: data.password
     }
     if(data.email.length && data.password.length > 3){
-      axios.post('https://ecommerce-rom.onrender.com/api/v1/auth/login', login)
+      axios.post('http://localhost:3000/api/v1/auth/login', login)
         .then(res => {
           setUserLogged(true)
           localStorage.setItem('token',res.data.user)
@@ -90,9 +94,10 @@ const Form = ({setUserLogged}) => {
     const {name, ...login} = userCreate
     console.log(login)
     if(data.email.length && data.password.length > 6  && data.name.length){
-      axios.post('https://ecommerce-rom.onrender.com/auth/register', userCreate)
+      console.log('oobjc', userCreate)
+      axios.post('http://localhost:3000/api/v1/auth/register', userCreate)
         .then(res => {
-            axios.post('https://ecommerce-rom.onrender.com/api/v1/auth/login', login)
+            axios.post('http://localhost:3000/api/v1/auth/login', login)
               .then(res => {//#f5f5f5  #184219 #389f0e
                 setUserLogged(true)
                 localStorage.setItem('token',res.data.user)
@@ -114,49 +119,7 @@ const Form = ({setUserLogged}) => {
   const btnCreateUser = () => setCreateUser(!createUser)
 
 
-  const authFb = () => {
-
- // Initialize Firebase
- const app = initializeApp(firebaseConfig);
- const analytics = getAnalytics(app);
- const auth = getAuth(app)
-
-
- const provider = new FacebookAuthProvider()
-
-signInWithPopup(auth, provider)
-  .then((result) => {
-    // The signed-in user info.
-    const user = result.user;
-    console.log(user)
-    console.log(result)
-    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-    const credential = FacebookAuthProvider.credentialFromResult(result);
-    const accessToken = credential.accessToken;
-
-    // ...
-  })
-  .catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = FacebookAuthProvider.credentialFromError(error);
-
-    // ...
-  });
-
-  }
-
-
   const authGoogle = () => {
-
-    const app = initializeApp(firebaseConfig);
-    const analytics = getAnalytics(app);
-    const auth = getAuth(app)
-
 
     const provider = new GoogleAuthProvider();
 
@@ -180,7 +143,24 @@ signInWithPopup(auth, provider)
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
         // ...
+        console.log(error)
       });
+  }
+
+
+  const authGithub = async () => {
+    const provider = new GithubAuthProvider();
+    try {
+      const res = await signInWithPopup(auth, provider);
+      if (!res) {
+        throw new Error("Could not complete signup");
+      }
+
+      const user = res.user;
+      console.log(user);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -217,9 +197,9 @@ signInWithPopup(auth, provider)
           }
         </p>
       </div>
-      <div className='login__fb' onClick={authFb}>
+      <div className='login__fb' onClick={authGithub}>
         <i className="fa-brands fa-facebook"></i>
-        <span>Continuar con <b>facebook</b></span>
+        <span>Continuar con <b>Github</b></span>
       </div>
       <div className='login__google' onClick={authGoogle}>
         <i className="fa-brands fa-google"></i>

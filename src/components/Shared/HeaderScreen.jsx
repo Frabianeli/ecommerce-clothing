@@ -7,11 +7,13 @@ import { setAdmin } from '../../store/slices/admin'
 import { setCart } from '../../store/slices/cart'
 import {setSearch} from '../../store/slices/search'
 import './styles/headerScreen.css'
-
+import { useLocation } from "react-router-dom"
 
 const HeaderScreen = ({userLogged, setUserLogged}) => {
 
   const { register, reset, handleSubmit } = useForm()
+  
+
   const navbar = useRef()
   const search = useRef() 
 
@@ -20,6 +22,9 @@ const HeaderScreen = ({userLogged, setUserLogged}) => {
   const navigate = useNavigate()
 
   const products = useSelector(state => state.product)
+  const cart =  useSelector(state => state.cart)
+
+
 
   const toggle = () => {
     navbar.current.classList.toggle('navbar-open')
@@ -31,13 +36,8 @@ const HeaderScreen = ({userLogged, setUserLogged}) => {
 
   const submitSearch = (data) => {
     const value = data.search.toLowerCase()
-    console.log(data.search)
     search.current.classList.toggle('header__search-open')
-    const filter = products.filter(product => product.title.toLowerCase().includes(value))
-    if(filter.length){
-      dispatch(setSearch(filter))
-    }
-    navigate('/products')
+    navigate(`/products?search=${value}`)
     reset()
   }
 
@@ -47,8 +47,22 @@ const HeaderScreen = ({userLogged, setUserLogged}) => {
     setUserLogged(false)
     navigate('/login')
     dispatch(setAdmin(false))
+    window.scrollTo(0, 0) 
   }
   
+
+const [open, setOpen] = useState(false);
+
+const handleMouseEnter = () => {
+  setOpen(true);
+};
+
+const handleMouseLeave = () => {
+  setOpen(false);
+};
+const location = useLocation().pathname;
+
+
 
 
   return (
@@ -81,17 +95,31 @@ const HeaderScreen = ({userLogged, setUserLogged}) => {
           <nav className='navbar' ref={navbar}>
             <ul className='navbar__list'>
               <li onClick={toggle} className='navbar__item'>
-                <NavLink onClick={() => window.scrollTo(0, 0)}
+                <NavLink onClick={() =>{ window.scrollTo(0, 0)}}
                   to={'/cart'}
                   className={({ isActive }) =>
                     isActive
                       ?
-                      'navbar__link navbar__link-active'
+                      'navbar__link navbar__link-cart navbar__link-active'
                       :
-                      'navbar__link'}
+                      'navbar__link navbar__link-cart'}
                 >
                   <i className="fa-solid fa-cart-shopping"></i>
                   <p>Cart</p>
+                  {
+                    cart?.cart_products?.length > 0 &&
+                    <span className='navbar__link__amount'
+                    style={{
+                      background: location === '/cart' ? 
+                      'white' : 'crimson',
+                      color: location === '/cart' ? 
+                      'crimson' : 'white',
+                    }}>
+                      {
+                        cart.cart_products.length
+                      }
+                    </span>
+                  }
                 </NavLink>
               </li>
               <li onClick={toggle} className='navbar__item'>
@@ -116,8 +144,7 @@ const HeaderScreen = ({userLogged, setUserLogged}) => {
               </li>
               <li onClick={()=> !userLogged && toggle()} 
                 className='navbar__item'>
-                { 
-                  !userLogged ?
+
                   <NavLink onClick={() =>window.scrollTo(0, 0)}
                     to={'/login'}
                     className={({ isActive }) =>
@@ -126,21 +153,35 @@ const HeaderScreen = ({userLogged, setUserLogged}) => {
                         'navbar__link navbar__link-active'
                         :
                         'navbar__link'}
+                    style={!userLogged ? {display: 'flex'} : {display: 'none'}}
                   >
                     <i className="fa-solid fa-user"></i>
                     <p>Login</p>
                   </NavLink>
-                  :
-                  <details className='details'>
-                    <summary >
+
+                  <div className='navbar__link navbar__link-details' id='details'
+                    style={!userLogged ? {display: 'none'} : {display: 'flex'}}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                  >
+                    <button className='details__link__user'>
                       <i className="fa-solid fa-user"></i>
-                      <i className="fa-solid fa-caret-down"></i>
-                    </summary>
-                    <ul className='details__ul'>
-                      <li onClick={() => {signOff(), toggle()}}>Cerrar sesion</li>
-                    </ul>
-                  </details>
-                }
+                      {
+                        open ?
+                        <i className="fa-solid fa-caret-up caret-header"></i>
+                        :
+                        <i className="fa-solid fa-caret-down caret-header"></i>
+                      }
+                    {
+                     open &&
+                      <ul className='details__ul'
+                        onMouseEnter={handleMouseEnter} 
+                      >
+                        <li onClick={() => {signOff(), toggle()}}>Cerrar sesion</li>
+                      </ul>
+                    }
+                    </button>
+                  </div>
               </li>
             </ul>
           </nav>

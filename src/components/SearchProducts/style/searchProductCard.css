@@ -1,17 +1,11 @@
-.product__screen{
-    width: 90%;
-    margin: 40px auto;
-}
-.product__screen__title{
-    font-size: 16px;
-    color: #2c2c2c;
-}
 /*search product--*/
 .container-product{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    grid-auto-rows: max-content;
     gap: 10px;
     margin: 20px 0px;
+    width: 100%;
 }
 
 
@@ -19,31 +13,48 @@
     transition: scale .3s ease;
     cursor: pointer;
     position: relative;
+    background-color: #fff;
 }
 .card-product:hover{
     scale: 1.02;
 }
 .card-product__img{
     width: 100%;
-    height: 120px;
+    position: relative;
+    /*height: 120px;*/
+}
+.card-product__img:hover > .img--opacity{
+    opacity: 1;
 }
 .card-product__img img{
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1;
     object-fit: cover;
+    visibility: visible;
+    background-color: white;
+    transition: opacity .4s ease;
+}
+.img--opacity{
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
 }
 .card-product__info{
     padding: 5px;
+    padding-bottom: 15px;
+}
+.card-product__info__brand{
+    font-size: 14px;
+    padding: 5px 0px;
+    color: rgb(92 91 91);
+    text-transform: uppercase;
+    color: crimson;
 }
 .card-product__info__title{
     font-size: 14px;
     padding: 5px 0px;
     color: rgb(92 91 91);
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-}
-.title-cart{
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -106,10 +117,10 @@
     }
     .card-product__cart i{
         font-size: 12px;
-    }
+    }/*
     .card-product__img{
         height: 140px;
-    }
+    }*/
     .card-product__info__title{
         font-size: 15px;
     }
@@ -133,10 +144,10 @@
     }
     .card-product__cart__btn i{
         font-size: 14px;
-    }
+    }/*
     .card-product__img{
         height: 150px;
-    }
+    }*/
     .card-product__info__title{
         font-size: 16px;
     }
@@ -160,10 +171,10 @@
     }
     .card-product__cart__btn i{
         font-size: 15px;
-    }
+    }/*
     .card-product__img{
         height: 160px;
-    }
+    }*/
     .card-product__info__title{
         font-size: 16px;
     }
@@ -187,10 +198,10 @@
     }
     .card-product__cart__btn i{
         font-size: 16px;
-    }
+    }/*
     .card-product__img{
         height: 200px;
-    }
+    }*/
     .card-product__info__title{
         font-size: 18px;
     }

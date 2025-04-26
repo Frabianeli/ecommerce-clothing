@@ -1,7 +1,5 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { NavLink, useNavigate } from 'react-router-dom'
-import { setSearch } from '../../store/slices/search'
+import { useNavigate } from 'react-router-dom'
 import './style/searchProductCard.css'
 
 import Swal from 'sweetalert2'
@@ -12,25 +10,25 @@ import { getConfig } from '../../utils/getConfig'
 const SearchProductCard = ({product, cart}) => {
     
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+
     const productInfo = () => {
-        dispatch(setSearch(product))
-        navigate(':id')
+        navigate(`/products/${product.title}`)
         window.scrollTo( 0, 0)
     }
 
     const addCart = (e) => {
         e.stopPropagation()
-
+        console.log('add')
+        const productStock = product.product_stocks.filter(e => e.stock > 0)
         const cart = {
             cartTotalPrice: product.price,
             productId: product.id,
+            productStockId: productStock[0].id,
             quantity: 1,
             totalPrice: product.price 
         }
-
-        if(product.stock > 1){
-        axios.post('https://ecommerce-rom.onrender.com/api/v1/cart/me', cart, getConfig())
+        if(productStock[0].stock > 1){
+        axios.post('http://localhost:3000/api/v1/cart/me', cart, getConfig())
         .then(res =>{
             Swal.fire({
                 position: 'center',
@@ -45,6 +43,8 @@ const SearchProductCard = ({product, cart}) => {
             console.log(res)
         })
         .catch(err => console.log(err))
+        } else{
+            alert('No hay stock disponible')
         }
     }
 
@@ -55,17 +55,17 @@ const SearchProductCard = ({product, cart}) => {
                 src={product.products_imgs[0].url}
                 alt="product"
             />
+            {
+                product.products_imgs[1] &&
+                <img className='img--opacity' 
+                    src={product.products_imgs[1].url}
+                    alt="product"
+                />
+            }
         </div>
         <div className='card-product__info'>
-            <h2 
-                className={
-                    cart
-                    ? 
-                    'card-product__info__title title-cart'
-                    : 
-                    'card-product__info__title'
-                }
-            >
+            <h2 className='card-product__info__brand'>{product.brand.name}</h2>
+            <h2 className='card-product__info__title'>
                 {product.title}
             </h2>
             <h3 className='card-product__info__descrip'>

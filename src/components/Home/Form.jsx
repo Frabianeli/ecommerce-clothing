@@ -11,7 +11,7 @@ const Form = () => {
     const [products, setProducts] = useState()
   
     useEffect(() => {
-      axios.get('https://ecommerce-rom.onrender.com/api/v1/products')
+      axios.get('http://localhost:3000/api/v1/products')
                .then(res => setProducts(res.data.products))
                .catch(err=> console.log(err))
     }, [])
@@ -25,7 +25,7 @@ const Form = () => {
     }
     
     const btnImg = () => {
-      axios.get('https://ecommerce-rom.onrender.com/api/v1/products/img/ver')
+      axios.get('http://localhost:3000/api/v1/products/img/ver')
           .then(res => console.log(res))
           .catch(err => console.log(err))
     }

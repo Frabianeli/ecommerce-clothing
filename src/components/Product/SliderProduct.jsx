@@ -1,9 +1,19 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './styles/sliderProduct.css'
+import Loading from '../Shared/Loading'
+import { useParams } from 'react-router-dom'
 
 const SliderProduct = ({images}) => {
 
     const [indexCurrent, setIndexCurrent] = useState(0)
+    
+    const {name} = useParams()
+
+    useEffect(() => {
+        if(indexCurrent !== 0){
+            setIndexCurrent(0)
+        }
+    }, [name])
 
     const next = () => {
         const nextIndex = indexCurrent +1
@@ -27,18 +37,21 @@ const SliderProduct = ({images}) => {
 
         <div className='slider__product__current'>
             {
+                images.length ?
                 images?.map((img, index) => (
-                        <img 
-                            src={img.url} 
-                            alt='product'
-                            key={index}
-                            className={
-                                indexCurrent === index ?
-                                 `slider__imgs opacity-active` :
-                                  'slider__imgs'
-                                }
-                        />)
+                    <img 
+                        src={img.url} 
+                        alt='product'
+                        key={index}
+                        className={
+                            indexCurrent === index ?
+                                `slider__imgs opacity-active` :
+                                'slider__imgs'
+                            }
+                    />)
                 )
+                :
+                <Loading />
             }
             <button className='slider__product__btn-next' onClick={next}>
                 <i className="fa-solid fa-angle-right"></i>

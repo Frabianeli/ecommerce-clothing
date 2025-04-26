@@ -1,0 +1,45 @@
+/* Estilo para el contenedor del slider */
+.image-slider-container {
+    width: 100%;
+    height: 100%;
+  }
+  
+/* Estilo para las imágenes dentro del slider */
+.image-transition{
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  object-position: center;
+}
+.container__buttons{
+  position: absolute;
+  width: 200px;
+  bottom: 20px;
+  left: calc(50% - 100px);
+  display: flex;
+  justify-content: center;
+  gap: 3px;
+}
+.btn-index{
+  width: 12px;
+  aspect-ratio: 1;
+  background-color: rgb(235 235 235);
+  border-radius: 50%;
+  border: 1px solid #5b5b5b;
+}
+.btn-index--active{
+  background-color: crimson;
+  border: 1px solid crimson;
+}
+
+
+@media(min-width: 1220px){
+  .container__buttons{
+    gap: 5px;
+  }
+  .btn-index{
+    width: 14px;
+  }
+}

@@ -15,13 +15,20 @@ export const productSlice = createSlice({
 export const {setProduct} = productSlice.actions
 
 
-export const getAllProducts = () => (dispatch) => {
+export const getAllProducts = () => async (dispatch) => {
     dispatch(setIsLoading(true))
-    const URL = 'https://ecommerce-rom.onrender.com/api/v1/products'
-    return axios.get(URL)
-      .then(res => dispatch(setProduct(res.data.products)))
-      .catch(err => console.log(err))
-      .finally(() => dispatch(setIsLoading(false)))
+    const URL = 'http://localhost:3000/api/v1/products'
+    try {
+    try {
+      const res = await axios.get(URL);
+      dispatch(setProduct(res.data.products));
+      console.log('TERMINE EL THEN DE GET-ALLPRODUCTS');
+    } catch (err) {
+      return console.log(err);
+    }
+  } finally {
+    return (dispatch(setIsLoading(false)));
+  }
   }
 
 export default productSlice.reducer

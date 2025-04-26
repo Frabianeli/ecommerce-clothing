@@ -17,12 +17,14 @@ const CreateProduct = ({intervalSlider}) => {
 
     clearInterval(intervalSlider.current)
     useEffect(() => {
-        axios.get('https://ecommerce-rom.onrender.com/api/v1/products/categories')
-            .then(res => setCategories(res.data.categorys))
+        axios.get('http://localhost:3000/api/v1/products/categories')
+            .then(res => setCategories(res.data.categories))
             .catch(err => console.log(err))
     }, [])
 
+    console.log('categories' ,categories)
 
+    console.log(filesCurrent)
     const onSubmit = (data) => {
         const { files, ...newData } = data
         const newProduct = new FormData()
@@ -30,7 +32,7 @@ const CreateProduct = ({intervalSlider}) => {
             newProduct.append('files', filesCurrent[i])
         }
         newProduct.append('product', JSON.stringify(data))
-        axios.post('https://ecommerce-rom.onrender.com/api/v1/products/', newProduct, getConfig())
+        axios.post('http://localhost:3000/api/v1/products/', newProduct, getConfig())
             .then(res => {
                 Swal.fire({
                     position: 'center',
@@ -64,13 +66,13 @@ const CreateProduct = ({intervalSlider}) => {
         console.log(filesValue)
         const arrayFile = []
         for (let i = 0; i < filesValue.length; i++) {
-            arrayFile.push(filesValue[i])
+            const copy = [ ...filesCurrent,filesValue[i]]
+            setFilesCurrent(copy)
         }
-        setFilesCurrent(arrayFile)
     }
         
 
-    console.log(filesCurrent)
+    console.log('filesCurrent', filesCurrent)
 
     return (
         <section className='create__product__screen'>
@@ -90,12 +92,12 @@ const CreateProduct = ({intervalSlider}) => {
                                 </option>
                             ))
                         }
-                    </select>
-                    <input className='input-file' type="file"  onChange={captureImg}  multiple required/>
+                    </select>¡
+                    <input className='input-file' type="file"  onChange={captureImg}  multiple='4' required/>
                     <div className='create__product__container-img'>
                         {
                             filesCurrent.length > 0 &&
-                            filesCurrent?.map(file =>(
+                            filesCurrent.map(file =>(
                                 <img  key={file.name} src={URL.createObjectURL(file)} alt={file.name} />
                             ))
                         }

@@ -1,6 +1,5 @@
 .similar__product{
     margin: 60px auto;
-    overflow: hidden;
 }
 .similar__product__title{
     font-size: 22px;
@@ -10,10 +9,13 @@
 /*--Slider---*/
 .slider-similar-product{ 
     position: relative;
+    overflow: hidden;
 }
 .slider-similar-product__comtainer{
     display: flex;
     flex-wrap: nowrap;
+    width: 100%;
+    min-height: 100px;
 }
 .slider-similar-product__btn__prevent{
     position: absolute;

@@ -89,28 +89,42 @@
     padding: 14px 25px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 40px;
   }
   .product-purchase{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 10px 20px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     border-left: 1px solid var(--border-color);
     padding-left: 10px;
-  
+    position: relative;
+  }
+  .product-purchase__now{
+    font-size: 12px;
+    position: absolute;
+    top: -18px;
+    color: black;
+    font-weight: 600;
+    letter-spacing: 1px;
   }
   .product-purchase__title{
     font-weight: 400;
+    width: 50%;
   }
-  .product-purchase__quantity::before {
-    content: 'Quantity: ';
+  .product-purchase__quantity{
+    text-align: center;
+    width: 25%;
   }
-  .product-purchase__price::after {
-    content: ' ea'
+  .product-purchase__price{
+    width: 25%;
   }
+
   @media screen and (min-width: 720px) {
+    .purchase-card__container{
+      gap: 30px;
+    }
     .purchases {
       padding: 0 var(--padding-tablet);
       width: min(800px, 100%);

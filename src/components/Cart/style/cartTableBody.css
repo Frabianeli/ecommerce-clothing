@@ -11,6 +11,7 @@
 .td__img__container{
     width: 110px;
     height: 100px;
+    cursor: pointer;
 }
 .img{
     width: 100%;
@@ -80,6 +81,10 @@
     border: 1px solid rgb(212, 212, 212);
 
 }
+.td__quantity__title{
+    color: rgb(92, 92, 92);
+    display: none;
+}
 .td__quantity__container__btn{
     background-color: white;
 }
@@ -144,6 +149,10 @@
     .td__quantity{
         position: relative;
         justify-content: center;
+        pointer-events: none;
+    }
+    .td__quantity__container{
+        pointer-events: auto;
     }
     .td__quantity__price-total{
         position: absolute;
@@ -165,6 +174,14 @@
         gap: 0;
         margin-bottom: 40px;
     }
+    .td__quantity__title{
+        display: block;
+        position: relative;
+        right: -30px;
+    }
+    .td__info__quantity{
+        display: none;
+    }
     .td__info{
         grid-column: 2/3;
         padding: 0 20px;
@@ -173,6 +190,7 @@
         grid-column: 3/4;
         grid-row: 1/1;
         justify-content: start;
+        align-items: flex-start;
     }
     .td__price__total{
         grid-column: 4/5;
@@ -185,6 +203,7 @@
         grid-template-columns: 20% 32% 16% 16% 16%
     }
     .td__quantity{
+        grid-column: 3/4;
         align-items: flex-start;
     }
     .td__price__total{
@@ -193,9 +212,6 @@
     .td__talla{
         display: block; 
         grid-column: 4/5;
-    }
-    .td__quantity{
-        grid-column: 3/4;
     }
     .td__info__container h4{
         display: none;

@@ -1,11 +1,11 @@
 import React from 'react'
 import ShoppingProducts from './ShoppingProducts'
 
-const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
 
 const ShoppingCard = ({product}) => {
-const time = '2022-12-08 23:13:51.004 -0500'
+const time = product.createdAt
   const dateData = new Date(time)
 
   const datePurchase = `${months[dateData.getMonth()]} ${dateData.getDate()}, ${dateData.getFullYear()}`
@@ -15,9 +15,9 @@ const time = '2022-12-08 23:13:51.004 -0500'
       <h3 className='purchase-card__title'>{datePurchase}</h3>
       <div className='purchase-card__container'>
         {
-          months.map(a => (
+          product?.payments.map(product => (
             <ShoppingProducts
-              key={a}
+              key={product.id}
               product={product}
             />
           ))

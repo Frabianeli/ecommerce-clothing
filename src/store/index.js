@@ -4,6 +4,7 @@ import product from './slices/products'
 import cart from './slices/cart'
 import isLoading from './slices/isLoading'
 import admin from './slices/admin'
+import filterItem from './slices/filterItem'
 
 const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
         product,
         cart,
         isLoading,
-        admin
+        admin,
+        filterItem
     }
 })
 

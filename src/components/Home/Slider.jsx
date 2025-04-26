@@ -25,10 +25,11 @@ const arrayImage = [
     'https://wwwguide2freecom2c262.zapwp.com/q:i/r:1/wp:1/w:1/u:https://www.guide2free.com/wp-content/uploads/2018/11/nike-3.png',
   ]
 
-const Slider = ({intervalSlider}) => {
+const Slider = ({img}) => {
 
     const [images, setImages] = useState()
     const sliderContainer = useRef()
+    const intervalSlider = useRef()
 
     const prevent = () => {
       const sliderBoxes = sliderContainer.current.children
@@ -45,20 +46,20 @@ const Slider = ({intervalSlider}) => {
         
 			}, 30);
       
-        clearInterval(intervalSlider.current)
+        clearInterval(intervalSlider.current)/*
         intervalSlider.current = setInterval(()=> {
           next()
-        }, 3500)
+        }, 4000)*/
     }
   
 
     const next = useCallback( () => {
 
-      const firstSlide  = sliderContainer.current.children[0]
+      const firstSlide  = sliderContainer?.current?.children[0]
 
       sliderContainer.current.style.transition = 'transform .5s ease-out'
-
-      const width = firstSlide.offsetWidth
+      console.log(sliderContainer?.current?.children[0]?.offsetWidth)
+      const width = firstSlide?.offsetWidth
       sliderContainer.current.style.transform = `translateX(-${width}px)`
     
 			const transition = () => {
@@ -73,14 +74,13 @@ const Slider = ({intervalSlider}) => {
 			}
 
       sliderContainer.current.addEventListener('transitionend', transition)
-     /* clearInterval(intervalSliderSlider.current)
-      intervalSliderSlider.current = setInterval(()=> {
-        next()
-      }, 3500)*/
-      clearInterval(intervalSlider.current)
+      console.log('antes del Clear', intervalSlider)
+      /clearInterval(intervalSlider.current)
       intervalSlider.current = setInterval(()=> {
-        next()
-      }, 3500)
+        console.log('INTERVAL--SLIDER');
+          next();
+        }, 4000)
+      console.log('DEPSUES del Clear', intervalSlider)
     }, [])
 
 
@@ -92,22 +92,28 @@ const Slider = ({intervalSlider}) => {
         setImages(arrayImage)
       }
       intervalSlider.current = setInterval(()=> {
-          next()
+        console.log('INTERVAL--SLIDER');
+          next();
         }, 4000)
-      
+        return () => clearInterval(intervalSlider.current)
     }, [])
-
   return (
     <div className='slider'>
         <div className='slider__container' ref={sliderContainer}>
             {
-                images?.map((img, index )=> {
+                img?.map((img, index )=> {
                   return(
-                    <div className='slider__container__box' key={index} id={`box-${index}`}>
+                    <picture className='slider__container__box' key={index} id={`box-${index}`}>
+                      {
+                        img.source && 
+                        img.source.map(e =>(
+                          <source srcSet={e.img} media={`(${e.media})`}/>
+                        ))
+                      }
                         <img className='slider__img' 
-                            src={img}
+                            src={img.img}
                             alt="imagen" />  
-                     </div>)
+                     </picture>)
                 })
             }
         </div>

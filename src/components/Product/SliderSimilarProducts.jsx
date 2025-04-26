@@ -2,22 +2,31 @@ import React, { useRef } from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import CardSimilarProducts from './CardSimilarProducts'
+import axios from 'axios'
 
-const SliderSimilarProducts = ({ data }) => {
+const SliderSimilarProducts = ({ data, setProduct }) => {
 
     const sliderSimilar = useRef()
     const sliderSimilarContainer = useRef()
-
+  
     const [indexCurrent, setIndexCurrent] = useState(1)
     const [buttonOpen, setbuttonOpen] = useState()
-
-
-    let array = [1, 2, 3, 4, 5,6,7,8,9]
+    
+    useEffect(() => {        
+        const elementWidth = sliderSimilar.current.offsetWidth
+        const elementChildren = sliderSimilar.current.children.length
+        const elementChildrenWidth = sliderSimilar.current.children[0]?.offsetWidth
+        setbuttonOpen(
+            elementWidth +10
+            < 
+            elementChildrenWidth * elementChildren
+            )
+        }, [data])
 
     const next = () => {
-
         const children = sliderSimilar.current.children
         let widthCard = children[0].offsetWidth
+        console.log(children)
         const cardExcel = sliderSimilar.current.offsetWidth * 0.12
         const widthNext = widthCard * indexCurrent
         const widthTotalCurrent = sliderSimilar.current.offsetWidth + widthNext
@@ -44,25 +53,17 @@ const SliderSimilarProducts = ({ data }) => {
             sliderSimilar.current.style.transform = `translateX(-${preventWidth}px)`
             setIndexCurrent(indexCurrent - 1)
         }
-    }
-
-
-    useEffect(() => {
-        setbuttonOpen(
-            sliderSimilar.current?.offsetWidth + 10
-            <
-            sliderSimilar.current?.children[0].offsetWidth * array.length
-        )
-    },[])
-
+    } 
+   
     return (
         <div className='slider-similar-product' ref={sliderSimilarContainer}>
             <div className='slider-similar-product__comtainer' ref={sliderSimilar}>
                 {
-                    array.map(e =>
+                    data?.map(e =>
                         <CardSimilarProducts
-                            key={e}
-                            data={data[0]}
+                            setProduct={setProduct}
+                            key={e.id}
+                            data={e}
                         />
                     )
                 }

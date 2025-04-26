@@ -3,13 +3,13 @@ import SliderSimilarProducts from './SliderSimilarProducts'
 import './styles/similarProducts.css'
 
 
-const SimilarProducts = ({data}) => {
+const SimilarProducts = ({data, title, setProduct}) => {
 
 
   return (
     <section className='similar__product'>
-        <h3 className='similar__product__title'>Productos similares :</h3>
-        <SliderSimilarProducts data={data}/>
+        <h3 className='similar__product__title'>{title}</h3>
+        <SliderSimilarProducts setProduct={setProduct} data={data}/>
     </section>
   )
 }
